@@ -6,6 +6,9 @@
 
 var isRec = false;
 // var wasRec = false;
+var accX = [];
+var accY = [];
+var accZ = [];
 var motionData = [];
 
 const button = document.getElementById("button");
@@ -35,6 +38,10 @@ function getMotion(e) {
             var x = e.accelerationIncludingGravity.x;
             var y = e.accelerationIncludingGravity.y;
             var z = e.accelerationIncludingGravity.z;
+
+            accX.push(x);
+            accY.push(y);
+            accZ.push(z);
             
             document.getElementById("x").textContent = x;
             document.getElementById("y").textContent = y;
@@ -69,6 +76,7 @@ function touchEnd(e) {
 }
 
 if (!isRec && wasRec) {
+    console.log(accX);
     do_post();//サーバーにmotiondataを送る
 }
 
