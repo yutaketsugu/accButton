@@ -5,14 +5,33 @@
 
 
 var isRec = false;
-// var wasRec = false;
+var wasRec = false;
 var accX = [];
 var accY = [];
 var accZ = [];
 var motionData = [];
+var url = "http://localhost:8080";
+var contentUrl;
 
 const button = document.getElementById("button");
 
+$(function(){
+    if(!isRec && wasRec) {
+        var post_array = {"cmd":"match_gesture", "data":{"dataX":accX, "dataY":accY, "dataZ":accZ}};
+        var post_data = JSON.stringify(post_array);
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: post_data,
+            dataType : "json"
+        }).done(function(data){
+            console.log("sucsess");
+            contentUrl = data;
+        }).fail(function(XMLHttpRequest, status, e){
+            alert(e);
+        });
+    }
+});
 
 init();
 
@@ -33,6 +52,7 @@ function getMotion(e) {
     e.preventDefault();
 
     if (isRec) {
+        wasRec = false;
         if (e.accelerationIncludingGravity) {
             
             var x = e.accelerationIncludingGravity.x;
@@ -57,10 +77,12 @@ function getMotion(e) {
         motionData.push(motion);
         */
 
+    } else {
+        wasRec = true;
     }
+    
 
 }
-
 
 function touchStart(e) {
     e.preventDefault();
@@ -77,7 +99,7 @@ function touchEnd(e) {
 
 if (!isRec && wasRec) {
     console.log(accX);
-    do_post();//サーバーにmotiondataを送る
+    //do_post(url, );//サーバーにmotiondataを送る
 }
 
 /*
@@ -85,5 +107,14 @@ if (!isRec && wasRec) {
 */
 
 function do_post(e) {
-    var data = []
+    var post_array = {"cmd":"match_gesture", "data":{"dataX":accX, "dataY":accY, "dataZ":accZ}};
+    var post_data = JSON.stringify(post_array);
+    console.log(post_data);
+}
+
+function post() {
+    xhr.open('POST', 'server.py', true);
+    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    // フォームに入力した値をリクエストとして設定
+    xhr.send(request);
 }
