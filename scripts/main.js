@@ -52,7 +52,6 @@ function getMotion(e) {
     e.preventDefault();
 
     if (isRec) {
-        wasRec = false;
         if (e.accelerationIncludingGravity) {
             
             var x = e.accelerationIncludingGravity.x;
@@ -77,8 +76,6 @@ function getMotion(e) {
         motionData.push(motion);
         */
 
-    } else {
-        wasRec = true;
     }
     
 
@@ -87,7 +84,7 @@ function getMotion(e) {
 function touchStart(e) {
     e.preventDefault();
     isRec = true;
-
+    wasRec = false;
     motionData = [];
 
 }
@@ -95,6 +92,7 @@ function touchStart(e) {
 function touchEnd(e) {
     e.preventDefault();
     isRec = false;
+    wasRec = true;
 }
 
 if (!isRec && wasRec) {
