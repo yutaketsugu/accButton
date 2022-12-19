@@ -10,7 +10,7 @@ var accX = [];
 var accY = [];
 var accZ = [];
 var motionData = [];
-var url = "http://192.168.10.17:8080";
+var url = "http://192.168.10.17:58080";
 var contentUrl;
 
 const button = document.getElementById("button");
