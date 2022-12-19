@@ -15,22 +15,12 @@ var contentUrl;
 
 const button = document.getElementById("button");
 
-$(function(){
-    if(!isRec && wasRec) {
-        var post_array = {"cmd":"match_gesture", "data":{"dataX":accX, "dataY":accY, "dataZ":accZ}};
-        var post_data = JSON.stringify(post_array);
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: post_data,
-            dataType : "json"
-        }).done(function(data){
-            console.log("sucsess");
-            contentUrl = data;
-        }).fail(function(XMLHttpRequest, status, e){
-            alert(e);
-        });
-    }
+$.ajax({
+    url: "http://localhost:8080"
+}).done((data, textStatus, jqXHR) => {
+    // 正常処理
+}).fail((jqXHR, textStatus, errorThrown) => {
+    // 異常処理
 });
 
 init();
