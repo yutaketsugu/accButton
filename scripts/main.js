@@ -16,7 +16,7 @@ var contentUrl;
 const button = document.getElementById("button");
 
 $.ajax({
-    url: "http://localhost:8080"
+    url: url
 }).done((data, textStatus, jqXHR) => {
     // 正常処理
 }).fail((jqXHR, textStatus, errorThrown) => {
