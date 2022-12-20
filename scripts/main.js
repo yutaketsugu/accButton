@@ -15,13 +15,26 @@ var contentUrl;
 
 const button = document.getElementById("button");
 
-$(function(){
-    url: url
-}).done((data, textStatus, jqXHR) => {
-    // 正常処理
-}).fail((jqXHR, textStatus, errorThrown) => {
-    // 異常処理
-});
+$( function() {
+    $('#button').mouseup(
+    function() {
+        var post_array = {"cmd":"match_gesture", "data":{"accX": accX, "accY": accY, "accZ": accZ}};
+        var post_data = JSON.stringify(post_array);
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: post_data,
+            dataType : "json"
+        }).done(function(data) {
+            console.log('sucsess');
+            //contentUrl = data;
+            //contents = JSON.parse(data);
+            $('#result').text(data.name);
+        }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(e);
+        })
+    });
+} );
 
 init();
 
