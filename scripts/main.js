@@ -93,6 +93,7 @@ $( function() {
             dataType : "json"
         }).done(function(data) {
             console.log('success');
+            console.log(accX);
             accX.length = 0;
             accY.length = 0;
             accZ.length = 0;
